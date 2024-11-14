@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+function throttle(fn,interval){
+        let lasttime=0;
+        return function(){
+            let now=Date.now();
+            if(now-lasttime>interval){
+                lasttime=now;
+                fn.apply(this,arguments);
+            }
+        };
+}
+const log =()=> console.log('Function executed');
+const throttleLog = throttle(log,1000);
+
+setInterval(()=>{
+    throttleLog();
+},500)
+    </script>
+</body>
+</html>
