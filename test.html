@@ -28,33 +28,46 @@
 
 // };
 function test1(arr){
-    arr=Array.from(new Set(arr));
-    return arr;
-}      
+    
+    return arr.flat(Infinity);
+}    
 function test2(arr){
     let arr1=[];
-    arr.forEach((item) => {
-        if(!arr1.includes(item) ){
-            arr1.push(item);
-        }
-        
-    });
+    arr.forEach( (item)=> {
+        if(item instanceof Array){
+            arr1=arr1.concat(test2(item));
 
-    return arr1;
-}        
-function test3(arr){
-    let arr1=[];
-    let map=new Map();
-    arr.forEach((item)=>{
-        if(!map.has(item)){
-            map.set(item,true);
+        }
+        else{
             arr1.push(item);
         }
     });
     return arr1;
 }
 
+function test3(arr){
 
+return arr.reduce((prev,val)=>{
+ return prev.concat(Array.isArray(val)?test3(val):val);
+},[]); 
+}
+function test4(arr){
+    let arr1=[];
+    let flag=true;
+    arr.forEach((item)=>{
+        if(Array.isArray(item)){
+                arr1.push(...item);
+                flag=false;
+        }else{
+            arr1.push(item);
+        }
+    });
+    if(flag){
+        return arr1;
+    }
+    return test4(arr1);
+
+}
 
 // const log =()=> console.log('Function executed');
 // const debounceLog = debounce(log);
@@ -62,11 +75,12 @@ function test3(arr){
 // debounceLog();
 // debounceLog();
 // debounceLog();
-const arr = [1, 2, 2, 'abc', 'abc', true, true, false, false, undefined, undefined, NaN, NaN]
-console.log(test1(arr));
-console.log(test2(arr));
-console.log(test3(arr));
+// 
+var arr = [1,2,[3,4,5,[6,7,8],9],10,[11,12]];
 
+// console.log(test2(arr));
+// console.log(test3(arr));
+console.log(test4(arr));
     </script>
 </body>
 </html>
