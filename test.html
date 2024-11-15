@@ -7,7 +7,7 @@
 </head>
 <body>
     <script>
-function debounce(fn){
+// function debounce(fn){
     // let timer=null;
     // return function(){
     //     if(timer) clearTimeout(timer);
@@ -17,25 +17,56 @@ function debounce(fn){
     //     },1005);
 
     // }
-    let timer=null;
+//     let timer=null;
 
-return function(){
-    if(timer) clearTimeout(timer);
-    timer=setTimeout(()=>{
-        fn.call(this,arguments);
-        timer=null;
-    },100);
+// return function(){
+//     if(timer) clearTimeout(timer);
+//     timer=setTimeout(()=>{
+//         fn.call(this,arguments);
+//         timer=null;
+//     },100);
 
-};
-       
+// };
+function test1(arr){
+    arr=Array.from(new Set(arr));
+    return arr;
+}      
+function test2(arr){
+    let arr1=[];
+    arr.forEach((item) => {
+        if(!arr1.includes(item) ){
+            arr1.push(item);
+        }
         
-}
-const log =()=> console.log('Function executed');
-const debounceLog = debounce(log);
+    });
 
-debounceLog();
-debounceLog();
-debounceLog();
+    return arr1;
+}        
+function test3(arr){
+    let arr1=[];
+    let map=new Map();
+    arr.forEach((item)=>{
+        if(!map.has(item)){
+            map.set(item,true);
+            arr1.push(item);
+        }
+    });
+    return arr1;
+}
+
+
+
+// const log =()=> console.log('Function executed');
+// const debounceLog = debounce(log);
+
+// debounceLog();
+// debounceLog();
+// debounceLog();
+const arr = [1, 2, 2, 'abc', 'abc', true, true, false, false, undefined, undefined, NaN, NaN]
+console.log(test1(arr));
+console.log(test2(arr));
+console.log(test3(arr));
+
     </script>
 </body>
 </html>
