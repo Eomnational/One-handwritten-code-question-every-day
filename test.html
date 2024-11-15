@@ -7,22 +7,35 @@
 </head>
 <body>
     <script>
-function throttle(fn,interval){
-        let lasttime=0;
-        return function(){
-            let now=Date.now();
-            if(now-lasttime>interval){
-                lasttime=now;
-                fn.apply(this,arguments);
-            }
-        };
+function debounce(fn){
+    // let timer=null;
+    // return function(){
+    //     if(timer) clearTimeout(timer);
+    //     timer=setInterval(()=>{
+    //         fn.call(this,arguments);
+    //         timer=null;
+    //     },1005);
+
+    // }
+    let timer=null;
+
+return function(){
+    if(timer) clearTimeout(timer);
+    timer=setTimeout(()=>{
+        fn.call(this,arguments);
+        timer=null;
+    },100);
+
+};
+       
+        
 }
 const log =()=> console.log('Function executed');
-const throttleLog = throttle(log,1000);
+const debounceLog = debounce(log);
 
-setInterval(()=>{
-    throttleLog();
-},500)
+debounceLog();
+debounceLog();
+debounceLog();
     </script>
 </body>
 </html>
