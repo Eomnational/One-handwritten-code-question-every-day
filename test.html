@@ -45,13 +45,45 @@ function test1(arr){
 
 
 //递归
-
+function test2(arr){
+    let arr1=[];
+    arr.forEach((item) => {
+        if(item instanceof Array){
+            arr1=arr1.concat(test2(item));
+        }else{
+            arr1.push(item);
+        }
+    });
+    return arr1;
+}
 
 
 //reduce
-
+function test3(arr){
+    let arr1=[];
+    return arr.reduce((prev,item)=>{
+        return prev.concat(Array.isArray(item)?test3(item):item)
+    },[])
+        
+    }
 
 //...
+function test4(arr){
+        let arr1=[];
+        let flag=true;
+        arr.forEach((item) => {
+            if(Array.isArray(item)){
+               arr1.push(...item);
+               flag=false;
+            }else{
+                arr1.push(item);
+            }
+        });
+        if(flag){
+            return arr1;
+        }
+    return test4(arr1);
+}
 // 测试函数
 // // 定义一个测试函数
 // function logMessage(message) {
