@@ -18,4 +18,5 @@ function test2(arr){
     return res;
 }
 
+
 console.log(test2(arr));
