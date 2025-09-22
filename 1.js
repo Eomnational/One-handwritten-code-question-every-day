@@ -1,9 +1,9 @@
 function debounce(func,delay){
     let timer=null;
     return function(...args){
-        clearTimeout(timer);
+        if(timer) clearTimeout(timer);
         timer=setTimeout(()=>{
-            func.call(this,args);
+            func.apply(this,args);
         },delay);
     }
     
